@@ -6,7 +6,7 @@
 /*   By: vscabell <vscabell@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 01:38:05 by vscabell          #+#    #+#             */
-/*   Updated: 2020/09/02 03:28:37 by vscabell         ###   ########.fr       */
+/*   Updated: 2020/09/06 00:35:33 by vscabell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,7 @@
 #include "libasm.h"
 #include <stdio.h>
 
-t_list	*ft_create_elem(void *data)
-{
-	t_list	*elem;
-
-	elem = malloc(sizeof(t_list));
-	if (!elem)
-		return (NULL);
-	elem->data = data;
-	elem->next = NULL;
-	return (elem);
-}
-
-void	ft_make_list(t_list **list, void **str, int size)
-{
-	t_list *tmp;
-	int		i;
-
-	i = 0;
-	if (!(*list) || !(list))
-	{
-		*list = ft_create_elem(str[i]);
-		i++;
-	}
-	while (i < size)
-	{
-		tmp = ft_create_elem(str[i]);
-		tmp->next = *list;
-		*list = tmp;
-		i++;
-	}
-}
-
-void 	ft_print_list(t_list *list)
+void	ft_print_list(t_list *list)
 {
 	t_list	*list_ptr;
 
@@ -54,13 +22,14 @@ void 	ft_print_list(t_list *list)
 	while (list_ptr)
 	{
 		printf("%s\n", (char*)(list_ptr->data));
-		list_ptr =  list_ptr->next;
+		list_ptr = list_ptr->next;
 	}
 }
 
 void	ft_free(void *ptr)
 {
-	free(ptr);
+	if (ptr)
+		free(ptr);
 }
 
 void	print_ft_atoi_base(char *str, char *base)
@@ -78,20 +47,34 @@ void	test_ft_atoi_base(void)
 	print_ft_atoi_base("\f+-+-11101", "01");
 	print_ft_atoi_base(" +105", "0123456789");
 	print_ft_atoi_base("  -+11", "01");
+	printf("\e[3m(expected: error)\e[0m\n");
+	print_ft_atoi_base("15256", "");				// empty base
+	print_ft_atoi_base("15", "5");					// base w/ one char
+	print_ft_atoi_base("122", "-123456789");		// base with sign
+	print_ft_atoi_base("122", "012+3456789");		// base with sign
+	print_ft_atoi_base("111", "0 1");				// base with space
+	print_ft_atoi_base("568", "012345\t6789");		// base with space
+	print_ft_atoi_base("111", "01\r");				// base with space
+	print_ft_atoi_base("155", "01234506789");		// double char
+	print_ft_atoi_base("05", "012345067890");		// double char
+	print_ft_atoi_base("abc56", "0123456789");		// dont belong base
+	print_ft_atoi_base(NULL, "0123456789");			// null pointer
+	print_ft_atoi_base("501", NULL);				// null pointer
 }
 
 void	test_linked_list(void)
 {
-	char *arr[] = {"terceiro", "segundo", "primeiro", 0};
 	t_list	*list;
 
 	list = NULL;
-	ft_make_list(&list, (void **)arr, 3);
+	ft_list_push_front(&list, "milk");
+	ft_list_push_front(&list, "bread");
+	ft_list_push_front(&list, "apple");
 	printf("\n\e[1;1m~~~~~~  LINKED LIST  ~~~~~~\e[0m\n");
 	printf("\n\e[3mLISTA ORIGINAL:  \e[0m\n");
 	ft_print_list(list);
 	printf("\n\e[4m  FT_LIST_PUSH_FRONT  \e[0m\n\n");
-	ft_list_push_front(&list, "test");
+	ft_list_push_front(&list, "eggs");
 	ft_print_list(list);
 	printf("\n\e[4m  FT_LIST_SIZE  \e[0m\n\n");
 	printf("list size = %i\n", ft_list_size(list));
@@ -99,12 +82,13 @@ void	test_linked_list(void)
 	ft_list_sort(&list, ft_strcmp);
 	ft_print_list(list);
 	printf("\n\e[4m  FT_LIST_REMOVE_IF  \e[0m\n\n");
-	ft_list_remove_if(&list, "test", ft_strcmp, ft_free);
+	ft_list_remove_if(&list, "milk", ft_strcmp, ft_free);
 	ft_print_list(list);
 }
 
 int		main(void)
 {
 	test_ft_atoi_base();
-	test_linked_list();
+	// test_linked_list();
+	return (0);
 }

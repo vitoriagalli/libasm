@@ -65,7 +65,6 @@ ft_dup_char:
 	mov		rax, 0
 	ret
 
-
 ; prototype:		int	ft_check_base(char *base)
 ; first argument	rdi	base
 
@@ -74,7 +73,7 @@ ft_check_base:
 	je		.b_error
 	call	ft_strlen
 	cmp		rax, 1
-	jle		.b_error				; check if base <= 1
+	jle		.b_error			; check if base <= 1
 	push		rax				; store base addr
 .loop_check_char:
 	cmp		byte [rdi], 0
@@ -82,7 +81,7 @@ ft_check_base:
 	call	ft_is_space		; check if base has space
 	cmp		rax, 0
 	jg		.base_error
-	call	ft_is_sign		; check is base has sign
+	call	ft_is_sign		; check if base has sign
 	cmp		rax, 0
 	jne		.base_error
 	push	rsi
@@ -122,15 +121,18 @@ ft_posit_base:
 	mov		rax, -1
 	ret
 
-
-; prototype:		int	ft_atoi_base(char *str, char *base)
+; prototype:		int		ft_atoi_base(char *str, char *base)
 ; first argument	rdi		str
 ; second argument	rsi		base
 
 ft_atoi_base:
+	cmp		rdi, 0			; check if str is null
+	je		.error
+	cmp		rsi, 0			; check if base is null
+	je		.error
 	push	rdi				; store str address
 	mov		rdi, rsi		; mov the base addr to the argument
-	call	ft_check_base	; check anf return the base_len if it works
+	call	ft_check_base	; check and return the base_len if it works
 	mov		rbx, rax		; store base_len to some register
 	pop		rdi				; recover str address
 	cmp		rbx, 0			; if base_error, exit function
@@ -160,7 +162,7 @@ ft_atoi_base:
 	call	ft_posit_base
 	mov		rcx, rax		; save new posit into other register
 	pop		rax				; recover posit
-	cmp		rcx, 0			; check is (char) belongs to the base
+	cmp		rcx, 0			; check if (char) belongs to the base
 	jl		.exit
 	mul		rbx				; rax = rax * rbx, rbx is base_size
 	add		rax, rcx		; add the new posit
