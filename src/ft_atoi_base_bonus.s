@@ -1,12 +1,12 @@
 global		ft_atoi_base
 
 extern		ft_strlen
-extern		ft_strcpy
 
 section		.text
 
-; prototype			int	ft_is_space(char c)
-; first argument	rdi	char to compare
+;------------------------------------------------------------------------------;
+; int	ft_is_space(char c);                                                   ;
+;------------------------------------------------------------------------------;
 
 ft_is_space:
 	cmp		byte [rdi], 0x09
@@ -28,8 +28,9 @@ ft_is_space:
 	mov		rax, 1
 	ret
 
-; prototype:		int	ft_is_sign(char c)
-; first argument	rdi	char to compare
+;------------------------------------------------------------------------------;
+; int	ft_is_sign(char c);                                                    ;
+;------------------------------------------------------------------------------;
 
 ft_is_sign:
 	cmp		byte [rdi], 0x2B
@@ -45,16 +46,17 @@ ft_is_sign:
 	mov		rax, -1
 	ret
 
-; prototype			int	ft_dup_char(char *rest_string)
-; first argument	rsi	address of the rest of the base to compare
+;------------------------------------------------------------------------------;
+; int	ft_dup_char(char *rest_string_to_compare);                             ;
+;------------------------------------------------------------------------------;
 
 ft_dup_char:
-	mov		r9b, byte[rsi]		; move the char to a one byte string
+	mov		r9b, byte[rsi]
 	inc		rsi
 .looping:
-	cmp		byte [rsi], 0		; check if is end of str
+	cmp		byte [rsi], 0
 	je		.end_of_str
-	cmp		byte [rsi], r9b		; check if pointer base equals to the char
+	cmp		byte [rsi], r9b
 	je		.dup_char
 	inc		rsi
 	jmp		.looping
@@ -65,32 +67,33 @@ ft_dup_char:
 	mov		rax, 0
 	ret
 
-; prototype:		int	ft_check_base(char *base)
-; first argument	rdi	base
+;------------------------------------------------------------------------------;
+; int	ft_check_base(char *base);                                             ;
+;------------------------------------------------------------------------------;
 
 ft_check_base:
-	cmp		byte[rdi], 0		; check if base is null
+	cmp		byte[rdi], 0
 	je		.b_error
 	call	ft_strlen
 	cmp		rax, 1
-	jle		.b_error			; check if base <= 1
-	push		rax				; store base addr
+	jle		.b_error
+	push	rax
 .loop_check_char:
 	cmp		byte [rdi], 0
 	je		.end_of_base
-	call	ft_is_space		; check if base has space
+	call	ft_is_space
 	cmp		rax, 0
 	jg		.base_error
-	call	ft_is_sign		; check if base has sign
+	call	ft_is_sign
 	cmp		rax, 0
 	jne		.base_error
 	push	rsi
 	mov		rsi, rdi
-	call	ft_dup_char		; check if base has duplicate char
+	call	ft_dup_char
 	pop		rsi
 	cmp		rax, 0
 	jg		.base_error
-	inc		rdi					; increment base addr
+	inc		rdi
 	jmp		.loop_check_char
 .end_of_base:
 	pop		rax
@@ -101,17 +104,17 @@ ft_check_base:
 	mov		rax, 0
 	ret
 
-; prototype:		int	ft_posit_base(char *str, char base)
-; first argument	rdi	str
-; second argument	rsi	base
+;------------------------------------------------------------------------------;
+; int	ft_posit_base(char *str_posit_pointer, char *base);                    ;
+;------------------------------------------------------------------------------;
 
 ft_posit_base:
 	xor		rax, rax
-	mov		cl, [rdi]			; move the char value into a one byte register
+	mov		cl, [rdi]
 .nextchar:
-	cmp		byte [rsi + rax], 0	; check if is end of base
+	cmp		byte [rsi + rax], 0
 	jz		.not_base
-	cmp		cl, [rsi + rax]		; compare char with base pointer
+	cmp		cl, [rsi + rax]
 	je		.posit
 	inc		rax
 	jmp		.nextchar
@@ -121,14 +124,14 @@ ft_posit_base:
 	mov		rax, -1
 	ret
 
-; prototype:		int		ft_atoi_base(char *str, char *base)
-; first argument	rdi		str
-; second argument	rsi		base
+;------------------------------------------------------------------------------;
+; int	ft_atoi_base(char *str, char *base);                                   ;
+;------------------------------------------------------------------------------;
 
 ft_atoi_base:
-	cmp		rdi, 0			; check if str is null
+	cmp		rdi, 0
 	je		.error
-	cmp		rsi, 0			; check if base is null
+	cmp		rsi, 0
 	je		.error
 	push	rdi				; store str address
 	mov		rdi, rsi		; mov the base addr to the argument
@@ -142,7 +145,7 @@ ft_atoi_base:
 	inc		rdi
 	call	ft_is_space
 	cmp		rax, 0
-	jg		.while_is_space	; loop to increment char that is space
+	jg		.while_is_space
 	mov		r9, 1
 	mov		rax, 1
 	dec		rdi
@@ -152,7 +155,7 @@ ft_atoi_base:
 	inc		rdi
 	call	ft_is_sign
 	cmp		rax, 0
-	jne		.while_is_sign	; loop to get the signal result
+	jne		.while_is_sign
 	call	ft_posit_base	; return the posit of the char on the base string
 	cmp		rax, 0			; check if (char) belongs to the base
 	jl		.error
@@ -169,7 +172,7 @@ ft_atoi_base:
 	inc		rdi				; increment string  address
 	jmp		.loop_is_base
 .exit:
-	mul		r9				; verify the sign
+	mul		r9
 	ret
 .error:
 	mov		rax, 0

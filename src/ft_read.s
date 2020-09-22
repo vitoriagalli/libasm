@@ -1,8 +1,11 @@
-; prototype:		size_t	ft_read(int fd, void *buf, size_t count);
-; return value:		rax		sys_read(0)
-; first argument:	rdi		file descriptor, output location STDIN (0)
-; second argument:	rsi		buffer (address of where to place data)
-; third argument:	rdx		count (max numb of char to read)
+;------------------------------------------------------------------------------;
+; size_t	ft_read(int fd, void *buf, size_t count);                          ;
+;                                                                              ;
+; 1st arg:	rdi		file descriptor, output location STDIN (0)                 ;
+; 2nd arg:	rsi		buffer (address of where to place data)                    ;
+; 3th arg:	rdx		count (max numb of char to read)                           ;
+; return :	rax		sys_read(0)                                                ;
+;------------------------------------------------------------------------------;
 
 global		ft_read
 
@@ -11,16 +14,15 @@ section		.text
 extern		__errno_location
 
 ft_read:
-	mov		rax, 0			; sys_read syscall
+	mov		rax, 0
 	syscall
-	cmp		rax, 0			; if rax < 0, is error
+	cmp		rax, 0
 	jl		.error
-	jmp		.exit
+	ret
 .error:
-	imul	rax, -1
-	mov		rdx, rax				; move the rax addr to rdx
-	call	__errno_location		; return addr where to put the error value
-	mov		qword[rax], rdx			; move rdx value to [rax]
-	mov		rax, -1					; sinalize something went wrong
-.exit:
+	neg		rax
+	push	rax
+	call	__errno_location
+	pop		qword[rax]
+	mov		rax, -1
 	ret

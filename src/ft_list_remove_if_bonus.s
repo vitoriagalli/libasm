@@ -1,11 +1,11 @@
-; first argument:	rdi		t_list	*begin_list
-; second argument:	rsi		void	*data_ref
-; third argument:	rdx		int		(*cmp)()
-; fourth argument:	rcx		void	(*free_fct)(void *)
-
 global		ft_list_remove_if
 
 section		.text
+
+;------------------------------------------------------------------------------;
+; void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),   ;
+;					void (*free_fct)(void *))                                  ;
+;------------------------------------------------------------------------------;
 
 ft_list_remove_if:
 	mov		r8, rdi				; begin_list
@@ -18,7 +18,7 @@ ft_list_remove_if:
 .looping:
 	cmp		qword[r8 + 8], 0	; check end of list
 	je		.exit
-	cmp		r9, 0				; caso deja node unico, arrumar!
+	cmp		r9, 0
 	je		.exit
 	mov		rdi, [r9]			; ptr->data
 	mov		rsi, r13
@@ -29,7 +29,7 @@ ft_list_remove_if:
 	pop		rdx
 	je		.remove_node
 	mov		r8, r9
-	mov		r9, [r9 + 8]		; if is not, iterate pointers
+	mov		r9, [r9 + 8]		; iterate pointers
 	jmp		.looping
 .remove_node:
 	mov		rdi, r9

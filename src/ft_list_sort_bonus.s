@@ -2,15 +2,17 @@ global		ft_list_sort
 
 section		.text
 
-; first argument:	rdi		t_list	**begin_list
-; second argument:	rsi		int		(*cmp)()
+;------------------------------------------------------------------------------;
+; void		t_list_sort(t_list **begin_list, int (*cmp)());                    ;
+;------------------------------------------------------------------------------;
+
 ft_list_sort:
 	mov		rcx, rsi			; mov *cmp() to rcx register
 	mov		r8, rdi				; data pointer
-	cmp		qword[r8], 0x0		; check if list is null
+	cmp		qword[r8], 0x0		; check if addr list is null
 	je		.exit
 	mov		r9, [r8]			; ptr
-	cmp		qword[r9], 0x0		; check if list is null ??????
+	cmp		qword[r9], 0x0		; check if list is null
 	je		.exit
 .looping:
 	mov		r10, [r9 + 8]		; ptr->next
@@ -18,8 +20,8 @@ ft_list_sort:
 	je		.exit
 	mov		rdi, [r9]			; ptr->data
 	mov		rsi, [r10]			; ptr->next_data
-	push	rcx					; (for some reason, rcx is restarted (zero) after it is called)
-	call	rcx					; call *cmp() functior
+	push	rcx
+	call	rcx					; call *cmp() function
 	pop		rcx
 	jg		.swap				; swap values if s1 > s2
 	mov		r9, [r9 + 8]		; if is not, iterate pointers

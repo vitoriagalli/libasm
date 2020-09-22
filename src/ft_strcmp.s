@@ -1,8 +1,10 @@
-; prototype:		int		ft_strcmp(const char *s1, const char *s2)
-; first argument:	rdi		(const char *s1)
-; second argument:	rsi		(const char *s2)
-; return value:		rax		al is the one byte rax
-; data register		rdx		dl is the one byte rdx
+;------------------------------------------------------------------------------;
+; int		ft_strcmp(const char *s1, const char *s2)                          ;
+;                                                                              ;
+; 1st arg:	rdi		(const char *s1)                                           ;
+; 2nd arg:	rsi		(const char *s2)                                           ;
+; return :	rax		s1 - s2                                                    ;
+;------------------------------------------------------------------------------;
 
 global		ft_strcmp
 
@@ -13,14 +15,16 @@ ft_strcmp:
 	xor		rdx, rdx
 	xor		rcx, rcx
 .compare:
-	mov		al, [rdi + rcx]		; brackets is used to move the value (s1)
-	mov		dl, [rsi + rcx]		; move byte pointed to one byte register (s2)
-	cmp		al, 0				; check \0 char in s1
+	mov		al, [rdi + rcx]
+	mov		dl, [rsi + rcx]
+	cmp		al, 0
 	jz		.subtract
-	cmp		al, dl				; compare both bytes pointed (s1 and s2)
+	cmp		dl, 0
+	jz		.subtract
+	cmp		al, dl
 	jnz		.subtract
 	inc		rcx
 	jmp		.compare
 .subtract:
-	sub		rax, rdx			; s1 - s2
+	sub		rax, rdx
 	ret
