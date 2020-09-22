@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   header_main_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vscabell <vscabell@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 15:36:57 by vscabell          #+#    #+#             */
-/*   Updated: 2020/09/20 04:43:52 by vscabell         ###   ########.fr       */
+/*   Created: 2020/09/19 01:03:37 by vscabell          #+#    #+#             */
+/*   Updated: 2020/09/20 03:26:32 by vscabell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_main.h"
+#ifndef HEADER_MAIN_BONUS_H
+# define HEADER_MAIN_BONUS_H
 
-int		main(void)
-{
-	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
-	test_ft_strdup();
-	return (0);
-}
+# include <stdio.h>
+
+void	test_ft_atoi_base(void);
+void	test_linked_list(void);
+
+#endif

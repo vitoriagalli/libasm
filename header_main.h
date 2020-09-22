@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   header_main.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vscabell <vscabell@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 15:36:57 by vscabell          #+#    #+#             */
-/*   Updated: 2020/09/20 04:43:52 by vscabell         ###   ########.fr       */
+/*   Created: 2020/09/19 01:03:37 by vscabell          #+#    #+#             */
+/*   Updated: 2020/09/20 03:57:44 by vscabell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header_main.h"
+#ifndef HEADER_MAIN_H
+# define HEADER_MAIN_H
 
-int		main(void)
-{
-	test_ft_strlen();
-	test_ft_strcpy();
-	test_ft_strcmp();
-	test_ft_write();
-	test_ft_read();
-	test_ft_strdup();
-	return (0);
-}
+# include <stdio.h>
+# include <string.h>
+# include <unistd.h>
+# include <errno.h>
+# include <fcntl.h>
+
+void	test_ft_strlen(void);
+void	test_ft_strcpy(void);
+void	test_ft_strcmp(void);
+void	test_ft_read(void);
+void	test_ft_write(void);
+void	test_ft_read(void);
+void	test_ft_strdup(void);
+
+#endif
