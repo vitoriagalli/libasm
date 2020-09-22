@@ -9,10 +9,10 @@ section		.text
 ft_list_sort:
 	mov		rcx, rsi			; mov *cmp() to rcx register
 	mov		r8, rdi				; data pointer
-	cmp		qword[r8], 0x0		; check if addr list is null
+	cmp		qword[r8], 0		; check if addr list is null
 	je		.exit
 	mov		r9, [r8]			; ptr
-	cmp		qword[r9], 0x0		; check if list is null
+	cmp		qword[r9], 0		; check if list is null
 	je		.exit
 .looping:
 	mov		r10, [r9 + 8]		; ptr->next
