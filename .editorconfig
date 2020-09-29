@@ -1,0 +1,6 @@
+root = true
+
+[*]
+end_of_line = lf
+ident_style = tab
+ident_size = 4
