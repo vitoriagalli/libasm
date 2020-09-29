@@ -32,6 +32,8 @@ ft_list_remove_if:
 	mov		r9, [r9 + 8]		; iterate pointers
 	jmp		.looping
 .remove_node:
+	mov		r10, [r9]
+	push	r10					; store the node addr to free
 	mov		rdi, r9
 	cmp		[r8], r9
 	je		.first_node
@@ -50,13 +52,18 @@ ft_list_remove_if:
 	mov		r9, 0
 	jmp		.free_node
 .free_node:
-	push	r10
 	push	rdx
-	push	rcx
-	call	rcx					; call *free_fct() functior
+	push	rcx					; free the data
+	call	rcx					; call *free_fct() function
 	pop		rcx
 	pop		rdx
 	pop		r10
+	mov		rdi, r10			; move the elem removed to the argument
+	push	rdx
+	push	rcx					; free the node
+	call	rcx					; call *free_fct() function
+	pop		rcx
+	pop		rdx
 	jmp		.looping
 .exit:
 	ret
