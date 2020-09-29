@@ -57,8 +57,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
 test: $(NAME) $(SRC_TESTS) main.c
 	$(CC) main.c $(SRC_TESTS) $(HEADER) $(CC_FLAGS) -o $@
 
-bonus: $(NAME) $(OBJ_BONUS)
-	ar rcs $< $(OBJ_BONUS)
+bonus: all $(OBJ_BONUS)
+	ar rcs $(NAME) $(OBJ_BONUS)
 
 testbonus: bonus main_bonus.c
 	$(CC) main_bonus.c $(BONUS_TESTS) $(HEADER) $(CC_FLAGS) -o $@

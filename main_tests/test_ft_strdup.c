@@ -6,7 +6,7 @@
 /*   By: vscabell <vscabell@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 01:00:06 by vscabell          #+#    #+#             */
-/*   Updated: 2020/09/20 03:54:16 by vscabell         ###   ########.fr       */
+/*   Updated: 2020/09/25 14:30:03 by vscabell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@ static void	test(char *str)
 {
 	char	*ptr;
 
-	ptr = strdup(str);
+	ptr = NULL;
 	printf("ptr value       = \"%s\"\n", ptr);
 	printf("ptr addr        = %p\n", ptr);
+	ptr = strdup(str);
 	printf("strdup          = \"%s\"\n", ptr);
 	printf("ptr addr        = %p\n", ptr);
 	printf("strdup errno    = %d\n\n", errno);
 	free(ptr);
-	ptr = ft_strdup(str);
+	errno = 0;
+	ptr = NULL;
 	printf("ptr value       = \"%s\"\n", ptr);
 	printf("ptr addr        = %p\n", ptr);
+	ptr = ft_strdup(str);
 	printf("ft_strdup       = \"%s\"\n", ptr);
 	printf("ptr addr        = %p\n", ptr);
 	printf("ft_strdup errno = %d\n\n", errno);
 	free(ptr);
+	errno = 0;
 	printf("----------------------------\n");
 }
 

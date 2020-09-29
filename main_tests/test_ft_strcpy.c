@@ -6,7 +6,7 @@
 /*   By: vscabell <vscabell@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 01:00:09 by vscabell          #+#    #+#             */
-/*   Updated: 2020/09/20 03:41:06 by vscabell         ###   ########.fr       */
+/*   Updated: 2020/09/24 17:27:35 by vscabell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	test(char *src)
 {
 	char	dst[100];
 
+	bzero(dst, 100);
 	printf("src       = \"%s\"\n\n", src);
 	printf("dst value = \"%s\"\n", dst);
 	printf("dst addr  = %p\n", dst);
