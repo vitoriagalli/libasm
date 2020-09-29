@@ -1,10 +1,10 @@
 ;------------------------------------------------------------------------------;
-; size_t	ft_read(int fd, void *buf, size_t count);                          ;
+; size_t  ft_read(int fd, void *buf, size_t count);                            ;
 ;                                                                              ;
-; 1st arg:	rdi		file descriptor, output location STDIN (0)                 ;
-; 2nd arg:	rsi		buffer (address of where to place data)                    ;
-; 3th arg:	rdx		count (max numb of char to read)                           ;
-; return :	rax		sys_read(0)                                                ;
+; 1st arg:  rdi  file descriptor, output location STDIN (0)                    ;
+; 2nd arg:  rsi  buffer (address of where to place data)                       ;
+; 3th arg:  rdx  count (max numb of char to read)                              ;
+; return :  rax  sys_read(0)                                                   ;
 ;------------------------------------------------------------------------------;
 
 global		ft_read

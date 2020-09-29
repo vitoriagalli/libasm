@@ -1,8 +1,8 @@
 ;------------------------------------------------------------------------------;
-; char	*ft_strdup(const char *s)                                              ;
+; char  *ft_strdup(const char *s)                                              ;
 ;                                                                              ;
-; 1st arg:	rdi		str to duplicate                                           ;
-; return :	rax		addr of the dup str                                        ;
+; 1st arg:  rdi  str to duplicate                                              ;
+; return :  rax  addr of the dup str                                           ;
 ;------------------------------------------------------------------------------;
 
 global		ft_strdup

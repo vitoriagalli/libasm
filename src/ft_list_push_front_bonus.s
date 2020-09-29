@@ -6,7 +6,7 @@ extern		malloc
 extern		__errno_location		; /usr/include/asm-generic/errno-base.h
 
 ;------------------------------------------------------------------------------;
-; t_list	*ft_create_elem(void *data);                                       ;
+; t_list  *ft_create_elem(void *data);                                         ;
 ;------------------------------------------------------------------------------;
 
 ft_create_elem:
@@ -28,7 +28,7 @@ ft_create_elem:
 	ret
 
 ;------------------------------------------------------------------------------;
-; void		ft_list_push_front(t_list **begin_list, void *data);               ;
+; void  ft_list_push_front(t_list **begin_list, void *data);                   ;
 ; -----------------------------------------------------------------------------;
 
 ft_list_push_front:

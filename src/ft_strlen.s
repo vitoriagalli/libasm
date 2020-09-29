@@ -1,8 +1,8 @@
 ;------------------------------------------------------------------------------;
-; size_t	ft_strlen(const char *s)                                           ;
+; size_t  ft_strlen(const char *s)                                             ;
 ;                                                                              ;
-; 1st arg:	rdi		*s                                                         ;
-; return :	rax		len                                                        ;
+; 1st arg:  rdi  *s                                                            ;
+; return :  rax  len                                                           ;
 ;------------------------------------------------------------------------------;
 
 global		ft_strlen

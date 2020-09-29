@@ -1,9 +1,9 @@
 ;------------------------------------------------------------------------------;
-; int		ft_strcmp(const char *s1, const char *s2)                          ;
+; int  ft_strcmp(const char *s1, const char *s2)                               ;
 ;                                                                              ;
-; 1st arg:	rdi		(const char *s1)                                           ;
-; 2nd arg:	rsi		(const char *s2)                                           ;
-; return :	rax		s1 - s2                                                    ;
+; 1st arg:  rdi  (const char *s1)                                              ;
+; 2nd arg:  rsi  (const char *s2)                                              ;
+; return :  rax  s1 - s2                                                       ;
 ;------------------------------------------------------------------------------;
 
 global		ft_strcmp

@@ -1,9 +1,9 @@
 ;------------------------------------------------------------------------------;
-; char	*ft_strcpy(char *dest, const char *src)                                ;
+; char *ft_strcpy(char *dest, const char *src)                                 ;
 ;                                                                              ;
-; 1st arg:	rdi		dest                                                       ;
-; 2nd arg:	rsi		src                                                        ;
-; return :	rax		src address                                                ;
+; 1st arg:  rdi  dest                                                          ;
+; 2nd arg:  rsi  src                                                           ;
+; return :  rax  src address                                                   ;
 ;------------------------------------------------------------------------------;
 
 global		ft_strcpy
