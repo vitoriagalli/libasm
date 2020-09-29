@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------------;
-; size_t    ft_write(int fd, const void *buf, size_t count)                    ;
+; ssize_t    ft_write(int fd, const void *buf, size_t count)                   ;
 ;                                                                              ;
 ; 1st arg:  rdi file descriptor, output location STDOUT (1)                    ;
 ; 2nd arg:  rsi buffer (address of chars to write)                             ;

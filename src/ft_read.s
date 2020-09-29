@@ -1,5 +1,5 @@
 ;------------------------------------------------------------------------------;
-; size_t  ft_read(int fd, void *buf, size_t count);                            ;
+; ssize_t  ft_read(int fd, void *buf, size_t count);                           ;
 ;                                                                              ;
 ; 1st arg:  rdi  file descriptor, output location STDIN (0)                    ;
 ; 2nd arg:  rsi  buffer (address of where to place data)                       ;
